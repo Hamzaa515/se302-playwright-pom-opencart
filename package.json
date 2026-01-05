@@ -1,0 +1,26 @@
+{
+  "name": "se302-playwright-pom-opencart",
+  "version": "1.0.0",
+  "description": "This repository contains the course project for SE302 – Software Testing and Maintenance.  \r The project focuses on designing and implementing an automated web testing suite using Playwright and the Page Object Model (POM) architecture.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hamzaa515/se302-playwright-pom-opencart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hamzaa515/se302-playwright-pom-opencart/issues"
+  },
+  "homepage": "https://github.com/Hamzaa515/se302-playwright-pom-opencart#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.3"
+  }
+}
