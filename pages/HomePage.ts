@@ -31,10 +31,13 @@ export class HomePage {
     await this.assertLoaded();
   }
 
-  async assertLoaded(): Promise<void> {
-    await expect(this.brandLink).toBeVisible();
-    await expect(this.searchInput).toBeVisible();
-    await expect(this.navBar).toBeVisible();
+ async assertLoaded(): Promise<void> {
+  await expect(this.page).toHaveURL(/\/(\?.*)?$/);
+  await expect(this.brandLink).toBeVisible();
+  await expect(this.searchInput).toBeVisible();
+  await expect(this.navBar).toBeVisible();
+}
+
   }
 
   async search(query: string): Promise<void> {
