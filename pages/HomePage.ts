@@ -1,4 +1,3 @@
-
 import { expect, Locator, Page } from '@playwright/test';
 
 export class HomePage {
@@ -14,12 +13,17 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page;
 
-    this.brandLink = page.getByRole('link', { name: /your store/i });
+    
+    this.brandLink = page.locator('#logo a');
+
     this.searchInput = page.locator('#search input[name="search"]');
     this.searchButton = page.locator('#search button[type="button"]');
+
     this.navBar = page.locator('#menu');
     this.topLinks = page.locator('#top-links');
-    this.cartButton = page.getByRole('button', { name: /shopping cart/i });
+
+
+    this.cartButton = page.locator('#header-cart button, #cart button').first();
   }
 
   async visit(): Promise<void> {
@@ -46,24 +50,37 @@ export class HomePage {
   async openCategory(path: string[]): Promise<void> {
     if (path.length === 0) throw new Error('openCategory(path): provide at least one label');
 
-    await this.navBar.getByRole('link', { name: new RegExp(`^${escapeRx(path[0])}$`, 'i') }).click();
+    const labels = path.map((x) => x.trim()).filter(Boolean);
+    if (labels.length === 0) throw new Error('openCategory(path): labels must be non-empty');
 
-    for (let i = 1; i < path.length; i++) {
-      await this.page.getByRole('link', { name: new RegExp(`^${escapeRx(path[i])}$`, 'i') }).click();
+    
+    const first = this.navBar.getByRole('link', {
+      name: new RegExp(`^${escapeRx(labels[0])}$`, 'i'),
+    });
+
+    await first.hover();
+    await first.click();
+
+    for (let i = 1; i < labels.length; i++) {
+      const next = this.navBar.getByRole('link', {
+        name: new RegExp(`^${escapeRx(labels[i])}$`, 'i'),
+      });
+
+      await next.hover();
+      await next.click();
     }
 
     await expect(this.page).toHaveURL(/route=product\/category/i);
   }
 
   async openCartFromHeader(): Promise<void> {
-    
     await this.topLinks.getByRole('link', { name: /shopping cart/i }).click();
     await expect(this.page).toHaveURL(/route=checkout\/cart/i);
   }
 
   async openHomeByBrand(): Promise<void> {
     await this.brandLink.click();
-    await expect(this.page).toHaveURL(/\/$/);
+    await expect(this.page).toHaveURL(/\/(\?.*)?$/);
     await this.assertLoaded();
   }
 }
