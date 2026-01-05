@@ -13,15 +13,12 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page;
 
-    
     this.brandLink = page.locator('#logo a');
-
     this.searchInput = page.locator('#search input[name="search"]');
     this.searchButton = page.locator('#search button[type="button"]');
 
     this.navBar = page.locator('#menu');
     this.topLinks = page.locator('#top-links');
-
 
     this.cartButton = page.locator('#header-cart button, #cart button').first();
   }
@@ -31,13 +28,11 @@ export class HomePage {
     await this.assertLoaded();
   }
 
- async assertLoaded(): Promise<void> {
-  await expect(this.page).toHaveURL(/\/(\?.*)?$/);
-  await expect(this.brandLink).toBeVisible();
-  await expect(this.searchInput).toBeVisible();
-  await expect(this.navBar).toBeVisible();
-}
-
+  async assertLoaded(): Promise<void> {
+    await expect(this.page).toHaveURL(/\/(\?.*)?$/);
+    await expect(this.brandLink).toBeVisible();
+    await expect(this.searchInput).toBeVisible();
+    await expect(this.navBar).toBeVisible();
   }
 
   async search(query: string): Promise<void> {
@@ -46,17 +41,13 @@ export class HomePage {
 
     await this.searchInput.fill(q);
     await this.searchButton.click();
-
     await expect(this.page).toHaveURL(/route=product\/search/i);
   }
 
   async openCategory(path: string[]): Promise<void> {
-    if (path.length === 0) throw new Error('openCategory(path): provide at least one label');
-
     const labels = path.map((x) => x.trim()).filter(Boolean);
-    if (labels.length === 0) throw new Error('openCategory(path): labels must be non-empty');
+    if (labels.length === 0) throw new Error('openCategory(path): provide at least one label');
 
-    
     const first = this.navBar.getByRole('link', {
       name: new RegExp(`^${escapeRx(labels[0])}$`, 'i'),
     });
@@ -83,8 +74,12 @@ export class HomePage {
 
   async openHomeByBrand(): Promise<void> {
     await this.brandLink.click();
-    await expect(this.page).toHaveURL(/\/(\?.*)?$/);
     await this.assertLoaded();
+  }
+
+  async openCartDropdown(): Promise<void> {
+    await this.cartButton.click();
+    await expect(this.page.locator('#cart, #header-cart')).toBeVisible();
   }
 }
 
