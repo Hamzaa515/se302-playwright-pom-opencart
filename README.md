@@ -57,7 +57,7 @@ The project strictly follows the **Page Object Model** principle:
 ├── README.md
 └── .gitignore
 
-yaml
+
 
 
 ---
@@ -104,30 +104,46 @@ Before running the tests, make sure the following are installed:
 ```bash
 git clone https://github.com/your-username/se302-playwright-pom-opencart.git
 cd se302-playwright-pom-opencart
-Install dependencies
-
-bash
-
+```
+2. Install dependecies
+```bash
 npm install
-Install Playwright browsers
-
-bash
-
+```
+3. Install Playwright browsers
+```bash
 npx playwright install
-Running the Tests
+```
+
+4. Running the Tests
 Run all tests
-bash
-
+```bash
 npx playwright test
+```
+
 Run tests in headed mode
-bash
-
+```bash
 npx playwright test --headed
+```
+
 Run a specific test file
-bash
-
+```bash
 npx playwright test tests/smoke/smoke-01-home-ready.spec.ts
-View the HTML report
-bash
+```
 
+View the HTML report
+```bash
 npx playwright show-report
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
