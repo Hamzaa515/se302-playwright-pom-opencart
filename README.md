@@ -58,7 +58,7 @@ The project strictly follows the **Page Object Model** principle:
 └── .gitignore
 
 yaml
-Kopiraj kod
+
 
 ---
 
@@ -100,9 +100,9 @@ Before running the tests, make sure the following are installed:
 
 ## Setup Instructions
 
-1. lone the repository
+1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/se302-playwright-pom-opencart.git
+git clone https://github.com/your-username/se302-playwright-pom-opencart.git
 cd se302-playwright-pom-opencart
 Install dependencies
 
@@ -117,6 +117,7 @@ npx playwright install
 Running the Tests
 Run all tests
 bash
+
 npx playwright test
 Run tests in headed mode
 bash
