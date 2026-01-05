@@ -38,6 +38,8 @@ The project strictly follows the **Page Object Model** principle:
 
 ## Project Structure
 
+```md
+
 .
 ├── pages/
 │ ├── HomePage.ts
@@ -46,16 +48,19 @@ The project strictly follows the **Page Object Model** principle:
 │ ├── CartPage.ts
 │ ├── CheckoutPage.ts
 │ └── LoginPage.ts
+
 │
 ├── tests/
 │ ├── smoke/
 │ │ └── 5 smoke test cases
 │ └── functional/
 │ └── 10 functional test cases
+
 │
 ├── playwright.config.ts
 ├── README.md
 └── .gitignore
+```
 
 
 
@@ -114,8 +119,9 @@ npm install
 npx playwright install
 ```
 
-4. Running the Tests
-Run all tests
+## Running the Tests
+
+Running all tests
 ```bash
 npx playwright test
 ```
